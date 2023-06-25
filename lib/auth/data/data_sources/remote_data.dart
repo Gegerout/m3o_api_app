@@ -23,7 +23,7 @@ class RemoteData {
       }
     ));
     if(data.statusCode == 200) {
-      final model = UserModel.fromJson(data.data);
+      final model = UserModel.fromJson(data.data["session"]);
       file.writeAsStringSync(json.encode(data.data));
       return model;
     }

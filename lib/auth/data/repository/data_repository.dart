@@ -1,3 +1,4 @@
+import 'package:m30_api_app/auth/data/data_sources/local_storage.dart';
 import 'package:m30_api_app/auth/data/data_sources/remote_data.dart';
 import 'package:m30_api_app/auth/domain/repository/repository_impl.dart';
 import 'package:m30_api_app/auth/domain/usecases/user_usecase.dart';
@@ -19,6 +20,16 @@ class DataRepository extends Repository {
   Future<bool> createUser(String email, String password, String username) async {
     final data = await RemoteData().createUser(email, password, username);
     return data;
+  }
+
+  @override
+  Future<UserUseCase?> getUser() async {
+    final data = await LocalData().getUser();
+    if(data != null) {
+      final usecase = UserUseCase(data);
+      return usecase;
+    }
+    return null;
   }
 
 }
