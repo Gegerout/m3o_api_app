@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:m30_api_app/auth/data/repository/data_repository.dart';
 
 final signinProvider = ChangeNotifierProvider((ref) => signinNotifier());
 
@@ -40,5 +41,9 @@ class signinNotifier extends ChangeNotifier {
       isValid = false;
     }
     notifyListeners();
+  }
+
+  void loginUser(String email, String password) async {
+    final data = await DataRepository().loginUser(email, password);
   }
 }

@@ -1,13 +1,14 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-Widget textFieldWidget(String hintText, Function(String) onChanged, Icon? suffixIcon, bool obscureText) {
+Widget textFieldWidget(String hintText, Function(String) onChanged, Icon? suffixIcon, bool obscureText, TextEditingController controller) {
   return Container(
     width: double.infinity,
     height: 60,
     decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(20), color: Colors.white),
     child: TextFormField(
+      controller: controller,
       obscureText: obscureText,
       onChanged: onChanged,
       style: const TextStyle(

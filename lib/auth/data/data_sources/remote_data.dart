@@ -19,7 +19,7 @@ class RemoteData {
       "password": password
     }, options: Options(
       validateStatus: (status) {
-        return status! < 500;
+        return status! <= 500;
       }
     ));
     if(data.statusCode == 200) {
@@ -29,6 +29,27 @@ class RemoteData {
     }
     else {
       return null;
+    }
+  }
+
+  Future<bool> createUser(String email, String password, String username) async {
+    const String apiUrl = "https://api.m3o.com/v1/user/Create";
+    final Dio dio = Dio();
+    dio.options.headers["Authorization"] = "Bearer $apiKey";
+    final data = await dio.post(apiUrl, data: {
+      "email": email,
+      "password": password,
+      "username": username
+    }, options: Options(
+        validateStatus: (status) {
+          return status! < 500;
+        }
+    ));
+    if(data.statusCode == 200) {
+      return true;
+    }
+    else {
+      return false;
     }
   }
 }

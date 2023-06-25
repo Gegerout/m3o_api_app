@@ -15,4 +15,10 @@ class DataRepository extends Repository {
     }
   }
 
+  @override
+  Future<bool> createUser(String email, String password, String username) async {
+    final data = await RemoteData().createUser(email, password, username);
+    return data;
+  }
+
 }

@@ -7,7 +7,10 @@ import 'package:m30_api_app/auth/presentation/widgets/text_field_widget.dart';
 import '../../../utils/colors/colors.dart';
 
 class SigninPage extends ConsumerWidget {
-  const SigninPage({Key? key}) : super(key: key);
+  SigninPage({Key? key}) : super(key: key);
+
+  TextEditingController emailCont = TextEditingController();
+  TextEditingController passwordCont = TextEditingController();
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -41,7 +44,7 @@ class SigninPage extends ConsumerWidget {
                             Icons.close,
                             color: const Color(0xFFFF0000).withOpacity(0.52),
                           ),
-                    false),
+                    false, emailCont),
                 const SizedBox(height: 20),
                 textFieldWidget("Password", (value) {
                   ref.read(signinProvider.notifier).checkPassword(value);
@@ -52,7 +55,7 @@ class SigninPage extends ConsumerWidget {
                             Icons.close,
                             color: const Color(0xFFFF0000).withOpacity(0.52),
                           ),
-                    true),
+                    true, passwordCont),
                 const SizedBox(height: 30),
                 Center(
                   child: Row(
@@ -68,7 +71,9 @@ class SigninPage extends ConsumerWidget {
                         height: 60,
                         child: FloatingActionButton(
                           onPressed: ref.watch(signinProvider).isValid
-                              ? () {}
+                              ? () {
+                            ref.read(signinProvider.notifier).loginUser(emailCont.text, passwordCont.text);
+                          }
                               : () {
                                   showDialog(
                                       context: context,
