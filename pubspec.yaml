@@ -1,0 +1,33 @@
+name: m30_api_app
+description: A new Flutter project.
+publish_to: 'none'
+version: 1.0.0+1
+
+environment:
+  sdk: '>=3.0.2 <4.0.0'
+
+dependencies:
+  flutter:
+    sdk: flutter
+  cupertino_icons: ^1.0.2
+  flutter_riverpod: ^2.3.6
+  dio: ^5.2.1+1
+  path_provider: ^2.0.15
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^2.0.0
+flutter:
+  uses-material-design: true
+
+  assets:
+    - assets/images/
+
+  fonts:
+    - family: Futura BT
+      fonts:
+        - asset: assets/fonts/futura-medium-bt.ttf
+          weight: 500
+        - asset: fonts/futura-heavy-bt.ttf
+          weight: 900
