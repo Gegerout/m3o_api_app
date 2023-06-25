@@ -9,7 +9,7 @@ class RemoteData {
   Future<UserModel?> loginUser(String email, String password) async {
     const String apiUrl = "https://api.m3o.com/v1/user/Login";
     final Dio dio = Dio();
-    dio.options.headers["Authorization"] = "Bearer ZDAyNDQ4ZWMtMzYzMi00NDU1LThlYmMtYjM1NzA4NjA5ZGQz";
+    dio.options.headers["Authorization"] = "Bearer ";
     var dir = await getTemporaryDirectory();
     final File file = File("${dir.path}/userData.json");
     final data = await dio.post(apiUrl, data: {
