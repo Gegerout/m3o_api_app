@@ -3,6 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:m30_api_app/auth/presentation/pages/signup_page.dart';
 import 'package:m30_api_app/auth/presentation/states/signin_state.dart';
 import 'package:m30_api_app/auth/presentation/widgets/text_field_widget.dart';
+import 'package:m30_api_app/home/presentation/pages/home_page.dart';
 
 import '../../../utils/colors/colors.dart';
 
@@ -38,23 +39,27 @@ class SigninPage extends ConsumerWidget {
                 textFieldWidget("Your Email", (value) {
                   ref.read(signinProvider.notifier).checkEmail(value);
                 },
-                    ref.watch(signinProvider).isEmail
+                    ref
+                        .watch(signinProvider)
+                        .isEmail
                         ? null
                         : Icon(
-                            Icons.close,
-                            color: const Color(0xFFFF0000).withOpacity(0.52),
-                          ),
+                      Icons.close,
+                      color: const Color(0xFFFF0000).withOpacity(0.52),
+                    ),
                     false, emailCont),
                 const SizedBox(height: 20),
                 textFieldWidget("Password", (value) {
                   ref.read(signinProvider.notifier).checkPassword(value);
                 },
-                    ref.watch(signinProvider).isPassword
+                    ref
+                        .watch(signinProvider)
+                        .isPassword
                         ? null
                         : Icon(
-                            Icons.close,
-                            color: const Color(0xFFFF0000).withOpacity(0.52),
-                          ),
+                      Icons.close,
+                      color: const Color(0xFFFF0000).withOpacity(0.52),
+                    ),
                     true, passwordCont),
                 const SizedBox(height: 30),
                 Center(
@@ -70,31 +75,63 @@ class SigninPage extends ConsumerWidget {
                         width: 60,
                         height: 60,
                         child: FloatingActionButton(
-                          onPressed: ref.watch(signinProvider).isValid
+                          onPressed: ref
+                              .watch(signinProvider)
+                              .isValid
                               ? () {
-                            ref.read(signinProvider.notifier).loginUser(emailCont.text, passwordCont.text);
+                            ref.read(signinProvider.notifier).loginUser(
+                                emailCont.text, passwordCont.text).then((
+                                value) {
+                              if (value) {
+                                Navigator.pushAndRemoveUntil(context,
+                                    MaterialPageRoute(
+                                        builder: (context) => HomePage()), (
+                                        route) => false);
+                              }
+                              else {
+                                showDialog(
+                                    context: context,
+                                    builder: (context) {
+                                      return AlertDialog(
+                                        content: const Text(
+                                          "Wrong creds",
+                                          style: TextStyle(
+                                              fontWeight: FontWeight.w500,
+                                              fontSize: 20),
+                                        ),
+                                        actions: [
+                                          ElevatedButton(
+                                              onPressed: () {
+                                                Navigator.pop(context);
+                                              },
+                                              child: const Text("Ok"))
+                                        ],
+                                      );
+                                    });
+                              }
+                            });
                           }
                               : () {
-                                  showDialog(
-                                      context: context,
-                                      builder: (context) {
-                                        return AlertDialog(
-                                          content: const Text(
-                                            "Wrong creds",
-                                            style: TextStyle(
-                                                fontWeight: FontWeight.w500,
-                                                fontSize: 20),
-                                          ),
-                                          actions: [
-                                            ElevatedButton(
-                                                onPressed: () {
-                                                  Navigator.pop(context);
-                                                },
-                                                child: const Text("Ok"))
-                                          ],
-                                        );
-                                      });
-                                },
+                            showDialog(
+                                context: context,
+                                builder: (context) {
+                                  return AlertDialog(
+                                    content: const Text(
+                                      "Wrong creds",
+                                      style: TextStyle(
+                                          fontWeight: FontWeight.w500,
+                                          fontSize: 20),
+                                    ),
+                                    actions: [
+                                      ElevatedButton(
+                                          onPressed: () {
+                                            Navigator.pop(context);
+                                          },
+                                          child: const Text("Ok"))
+                                    ],
+                                  );
+                                });
+                          },
                           backgroundColor: AppColors.buttonColor,
                           elevation: 0,
                           child: const Icon(
