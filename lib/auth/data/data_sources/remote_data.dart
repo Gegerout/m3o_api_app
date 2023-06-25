@@ -6,12 +6,20 @@ import 'package:path_provider/path_provider.dart';
 import '../models/user_model.dart';
 
 class RemoteData {
-  Future<UserModel?> loginUser() async {
+  Future<UserModel?> loginUser(String email, String password) async {
     const String apiUrl = "https://api.m3o.com/v1/user/Login";
     final Dio dio = Dio();
+    dio.options.headers["Authorization"] = "Bearer ZDAyNDQ4ZWMtMzYzMi00NDU1LThlYmMtYjM1NzA4NjA5ZGQz";
     var dir = await getTemporaryDirectory();
     final File file = File("${dir.path}/userData.json");
-    final data = await dio.get(apiUrl);
+    final data = await dio.post(apiUrl, data: {
+      "email": email,
+      "password": password
+    }, options: Options(
+      validateStatus: (status) {
+        return status! < 500;
+      }
+    ));
     if(data.statusCode == 200) {
       final model = UserModel.fromJson(data.data);
       file.writeAsStringSync(json.encode(data.data));
