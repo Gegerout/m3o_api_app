@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:m30_api_app/auth/presentation/pages/signin_page.dart';
+import 'package:m30_api_app/utils/colors/colors.dart';
 
 void main() {
-  runApp(const MyApp());
+  runApp(const ProviderScope(child: MyApp()));
 }
 
 class MyApp extends StatelessWidget {
@@ -13,10 +16,10 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Flutter Demo',
       theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
-        useMaterial3: true,
+        scaffoldBackgroundColor: AppColors.scaffoldBackground,
+        fontFamily: "Futura BT"
       ),
-      home: Text("SS"),
+      home: SigninPage(),
     );
   }
 }

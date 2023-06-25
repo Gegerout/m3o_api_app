@@ -29,5 +29,5 @@ flutter:
       fonts:
         - asset: assets/fonts/futura-medium-bt.ttf
           weight: 500
-        - asset: fonts/futura-heavy-bt.ttf
+        - asset: assets/fonts/futura-heavy-bt.ttf
           weight: 900
