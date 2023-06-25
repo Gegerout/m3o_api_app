@@ -8,7 +8,7 @@ class LocalData {
     var dir = await getTemporaryDirectory();
     final File file = File("${dir.path}/userData.json");
     if(file.existsSync()) {
-      final model = UserModel.fromJson(json.decode(file.readAsStringSync()));
+      final model = UserModel.fromJson(json.decode(file.readAsStringSync())["session"]);
       return model;
     }
     return null;
