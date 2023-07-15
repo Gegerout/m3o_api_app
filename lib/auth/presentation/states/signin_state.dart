@@ -2,9 +2,9 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:m30_api_app/auth/data/repository/data_repository.dart';
 
-final signinProvider = ChangeNotifierProvider((ref) => signinNotifier());
+final signinProvider = ChangeNotifierProvider((ref) => SigninNotifier());
 
-class signinNotifier extends ChangeNotifier {
+class SigninNotifier extends ChangeNotifier {
   bool isEmail = true;
   bool isPassword = true;
   bool isValid = false;
