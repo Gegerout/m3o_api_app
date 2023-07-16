@@ -9,9 +9,9 @@ import '../widgets/text_field_widget.dart';
 class SignupPage extends ConsumerWidget {
   SignupPage({Key? key}) : super(key: key);
 
-  TextEditingController emailCont = TextEditingController();
-  TextEditingController passwordCont = TextEditingController();
-  TextEditingController nameCont = TextEditingController();
+  final TextEditingController emailCont = TextEditingController();
+  final TextEditingController passwordCont = TextEditingController();
+  final TextEditingController nameCont = TextEditingController();
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
