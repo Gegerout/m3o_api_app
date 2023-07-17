@@ -10,8 +10,8 @@ import '../../../utils/colors/colors.dart';
 class SigninPage extends ConsumerWidget {
   SigninPage({Key? key}) : super(key: key);
 
-  TextEditingController emailCont = TextEditingController();
-  TextEditingController passwordCont = TextEditingController();
+  final TextEditingController emailCont = TextEditingController();
+  final TextEditingController passwordCont = TextEditingController();
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
