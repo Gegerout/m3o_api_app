@@ -27,7 +27,7 @@ class SigninPage extends ConsumerWidget {
             child: Text(
               "Welcome\nBack",
               style: TextStyle(
-                  fontWeight: FontWeight.w900,
+                  fontWeight: FontWeight.w700,
                   color: Colors.white,
                   fontSize: 46),
             ),
